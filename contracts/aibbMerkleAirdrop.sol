@@ -11,7 +11,7 @@ contract aibbMerkleAirdrop {
       root = _root;
   }
 
-  function claimToken ( bytes32[] memory _proof, uint256 index, address recipient) view public {
+  function claimToken ( bytes32[] memory _proof, uint256 index, address recipient) view public returns(bool){
       require(claimedUser[(recipient)] == false);
       bytes32 node;
 
