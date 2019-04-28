@@ -28,5 +28,12 @@ contract aibbMerkleAirdrop {
       }
           node = keccak256(abi.encodePacked(node, _proof[i]));
       }
+
+      if(node == root) {
+        claimedUser[recipient] = true;
+       return true;
+      } else {
+        return false;
+      }
   }
 }

@@ -1,3 +1,1 @@
-node_modules/
-
 [ "0xd909f803936caa721761dd14c3dfba593c5fd9bf92eb620bd31a8c85822a1db1",      "0x51ef90bfe8edfaa57a62a25b90f0d7bc92c1900348bffb72135bb81c116bdddd",      "0x2d46aeb0a0ca0769c4bd2c7cccea39dcf04cf6c9ab13da7e4c7e2f27284a5d96" ]
