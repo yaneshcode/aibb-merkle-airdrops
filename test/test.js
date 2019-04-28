@@ -33,6 +33,41 @@ function computeMerkleRoot(nodes) {
   return nodes[0];
 }
 
+function computeMerkleProof(nodes, index) {
+  let proof = [];
+
+  if (index % 2 == 0) {
+    proof.push(nodes[index-1]);
+  }else{
+    proof.push(nodes[index+1]);
+  }
+
+  let layer = 0;
+
+  while (nodes.length != 1) {
+    let layerNodes = [];
+
+    for(let i = 0; i < nodes.length/2; i++) {
+      layerNodes.push(hashTwoNodes(nodes[i*2], nodes[(i*2)+1]));
+    }
+    nodes = layerNodes;
+    if (layer % 2 == 0) {
+      proof.push(nodes[0]);
+    } else {
+      proof.push(nodes[1])
+    }
+
+  }
+
+  // remove root from proof
+  proof.pop();
+
+  return {
+    root: nodes[0],
+    proof: proof
+
+  }
+}
 // Start contract testing
 contract('aibbMerkleAirdrop', (accounts) => {
 
@@ -48,10 +83,13 @@ contract('aibbMerkleAirdrop', (accounts) => {
 
     // Take the first 6 accounts and hash them
     let nodes = [];
-    for(let i = 0; i < 6; i++) {
+    for(let i = 0; i < 8; i++) {
+      console.log("Account #" + i + ": " + accounts[i])
       nodes.push(hashAddress(accounts[i]));
     }
 
     console.log("merkle root: ", computeMerkleRoot(nodes));
+    console.log("merkle proof:");
+    console.log(computeMerkleProof(nodes, 3))
   })
 });
